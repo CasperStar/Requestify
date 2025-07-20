@@ -1,6 +1,12 @@
 import React from 'react';
+import { Track } from '../models/Track';
 
-function TrackResult({ track, onRequest }) {
+interface TrackResultProps {
+  track: Track;
+  onRequest: (track: Track) => void;
+}
+
+const TrackResult: React.FC<TrackResultProps> = ({ track, onRequest }) => {
   return (
     <li style={{ display: 'flex', alignItems: 'center', background: '#fff', margin: '8px 0', padding: '12px', borderRadius: '6px', boxShadow: '0 1px 4px rgba(0,0,0,0.07)' }}>
       <img
@@ -20,6 +26,6 @@ function TrackResult({ track, onRequest }) {
       </button>
     </li>
   );
-}
+};
 
 export default TrackResult;

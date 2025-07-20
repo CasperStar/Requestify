@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 
-function SearchBar({ onSearch }) {
+interface SearchBarProps {
+  onSearch: (query: string) => void;
+}
+
+const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   const [query, setQuery] = useState('');
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
   };
 
@@ -13,7 +17,7 @@ function SearchBar({ onSearch }) {
     }
   };
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       handleSearch();
     }
@@ -37,6 +41,6 @@ function SearchBar({ onSearch }) {
       </button>
     </div>
   );
-}
+};
 
 export default SearchBar;
