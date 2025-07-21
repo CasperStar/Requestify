@@ -10,7 +10,7 @@ const dummyTracks: Track[] = [
 ];
 
 function App() {
-  const [tracks, setTracks] = useState<Track[]>(dummyTracks);
+  const [tracks, setTracks] = useState<Track[]>([]);
 
   const handleSearch = (query: string) => {
     // TODO: Implement search logic to backend
