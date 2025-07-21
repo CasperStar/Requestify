@@ -12,9 +12,22 @@ const dummyTracks: Track[] = [
 function App() {
   const [tracks, setTracks] = useState<Track[]>([]);
 
-  const handleSearch = (query: string) => {
-    // TODO: Implement search logic to backend
-    setTracks(dummyTracks);
+  const handleSearch = async (query: string) => {
+    try {
+      const res = await fetch(`http://localhost:5000/search?q=${encodeURIComponent(query)}`);
+      const data = await res.json();
+      // Map backend response to Track model
+      const mappedTracks: Track[] = data.map((track: any) => ({
+        id: track.id,
+        name: track.title,
+        artist: track.artist,
+        image: track.image || '',
+      }));
+      setTracks(mappedTracks);
+    } catch (err) {
+      console.error('Error fetching tracks:', err);
+      setTracks([]);
+    }
   };
 
   const handleRequest = (track: Track) => {
