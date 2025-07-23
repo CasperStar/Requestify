@@ -23,3 +23,6 @@ yarn-error.log*
 
 # Coverage
 coverage/
+
+# Spotify tokens
+tokens.json

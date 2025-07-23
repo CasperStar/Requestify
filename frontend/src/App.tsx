@@ -30,8 +30,24 @@ function App() {
     }
   };
 
-  const handleRequest = (track: Track) => {
-    alert(`Requested: ${track.name} by ${track.artist}`);
+  const handleRequest = async (track: Track) => {
+    // Construct the Spotify track URI
+    const trackUri = `spotify:track:${track.id}`;
+    try {
+      const res = await fetch('http://localhost:5000/add-to-playlist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ trackUri })
+      });
+      const data = await res.json();
+      if (res.ok) {
+        alert(`Added to playlist: ${track.name} by ${track.artist}`);
+      } else {
+        alert(`Failed to add to playlist: ${data.error || 'Unknown error'}`);
+      }
+    } catch (err) {
+      alert('Network error: Could not add to playlist');
+    }
   };
 
   return (
